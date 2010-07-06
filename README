@@ -1,0 +1,71 @@
+ - Alunos: 
+- Marco Antonio Bennato
+	-- Matrícula: GRR20075384
+- Felipe Mariani Lopes
+	-- Matrícula: GRR20061335
+
+2 - Tema: Desenho de grafos
+	O desenho de grafos apresenta desafios muito interessantes - minimizar 
+a quantidade de cruzamento de arestas, promover um espalhamento
+adequado dos vértices na tela, ... -, além de ser um dos temas que o Marco
+Antonio estuda.
+
+3 - Material utilizado:
+	3.1 - Pdfs e sites:
+			Como referência para pesquisa do tema, utilizamos o artigo 
+		"Graph Drawing by Force-directed Placement" escrito por 
+		THOMAS M. J. FRUCHTERMAN e EDWARD M. REINGOLD da Universidade 
+		de Illinois. Outro material usado foi o site 
+		http://www.cs.usyd.edu.au/~aquigley/3dfade/ - "What is a Force 
+		Directed Algorithm (Spring Algorithm)?". Além, é claro, de 
+		dezenas de sites espalhados pela web.
+	3.2 - Programas auxiliares:
+		3.2.1 - ``neato'':
+				Fizemos a tradução do algoritmo proposto no artigo de
+			FRUCHTERMAN para a linguagem C e o adaptamos para dar como
+			saída um arquivo que pudesse ser reconhecido pelo NEATO.
+				O desenho propriamente dito ficou a cargo deste programa,
+			somente o posicionamento dos vértices ficou por conta do nosso programa.
+
+4 - O algoritmo:
+	4.1 - Princípios do algoritmo:	
+		4.1.1 - Os vértices conectados por uma aresta são desenhados próximos.
+		4.1.2 - Os vértices não devem ser desenhados muito próximos um dos outros.
+
+	4.2 - Analogia atômico celestial:
+			Os vértices se comportam como partículas atômicas ou como corpos,
+		exercendo forças atrativa e repulsiva entre eles; as forças induzem
+		movemento. São forças irreais sendo aplicadas de um modo irreal, capazes
+		de formar um layout agradável.
+
+5 - Custos:
+	O algoritmo de desenho do grafo tem um custo de ¿(|V(G)|³)
+	
+
+6 - Problemas:
+		No início da implementação tínhamos o objetivo de nos basearmos
+	completamente no pseudocódigo apresentado no artigo citado acima para
+	dai criarmos o nosso próprio, entretanto a tarefa se mostrou muito mais 
+	complicada que imaginávamos e decidimos somente promover a tradução do
+	pseudocódigo para a linguagem C.
+		Durante a tradução e os primeiros testes, observamos que o algoritmo
+	apresentava alguns problemas, as fórmulas apresentadas podem não gerar um
+	posicionamento ideal para os vértices e os arredondamentos que o algoritmo
+	acaba fazendo acabam por tornar os ajustes pouco sutis.
+		Devido aos problemas apresentados, o programa acaba gerando imagens 
+	dos grafos com posicionamento não ideal.
+
+7 - Melhorias:
+		Para um melhor layout podemos buscar uma estratégia para melhorar
+	o arredondamento promovido pelo algoritmo e ainda podemos melhorar as
+	as fórmulas utilizadas para determinar atração e repulsão.
+
+8 - Utilizacao do programa:
+		Basta chamar graphollock <arquivo com a matriz de adjacencia> <arquivo destino para o formato dot-language>
+
+		o arquivo que contem a matriz de adjacencia deve conter somente 0's e 1's sem espacamento entre si e com o formato da matriz, por exemplo
+		
+		01
+		10
+
+		será gerado um arquivo em dot-lenguage com a descricao do grafo e as posicoes dos vertices para interpretacao do neato.
