@@ -1,35 +1,26 @@
-#include <stdlib.h>
-#include <stdio.h>
-#define true 1
-#define false 0
+#include "CrossCount.h"
 
-typedef int bool;
-
-typedef struct Point{
-	int x;
-	int y;
-}Point;
-
-bool Left(Point, Point, Point);
-
+#ifdef CROSSTEST
 int main(int argc, char **argv){
-	Point a, b, c;
+	Point a, b, c, d;
 	bool retorno;
 
 	printf("Entre com dois pontos do segmento:\n");
 	scanf("%i %i", &(a.x), &(a.y));	
 	scanf("%i %i", &(b.x), &(b.y));		
-	scanf("%i %i", &(c.x), &(c.y));	
+	scanf("%i %i", &(c.x), &(c.y));
+	scanf("%i %i", &(d.x), &(d.y));
 
 /*	printf("Pontos:\n A=(%i,%i), B=(%i,%i), C=(%i, %i)\n", a.x, a.y, b.x, b.y, c.x, c.y);*/
 
-	retorno = Left(a, b, c);
+	retorno = HaveCrossing(a, b, c, d);
 
 	if ( retorno == true)
-		printf("Ta na esquerda\n");
+		printf("Cruza\n");
 	else
-		printf("Ta na direita\n");
+		printf("Nãocruza\n");
 }
+#endif
 
 bool Left(Point a, Point b, Point c){
 	/*caso em que o segmento nao e horizontal*/
@@ -37,4 +28,9 @@ bool Left(Point a, Point b, Point c){
 		return (c.x <= a.x && c.x <= b.x) ? true : false;
 	else
 		return (c.y <= a.y && c.y <= b.y) ? true : false;	
+}
+
+/*Determina se ha cruzamento entre dois segmentos AB, CD*/
+bool HaveCrossing(Point a, Point b, Point c, Point d){
+	return (Left(a, b, c) ^ Left(a, b, d)) && (Left(c, d, a) ^ Left(c, d, b));
 }
