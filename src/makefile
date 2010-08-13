@@ -1,5 +1,5 @@
 all: arquivo.o adjacent_matrix.o drawing_core.o main.o Data/queue.o
-	gcc -o graphollock arquivo.c main.c adjacent_matrix.c drawing_core.c -lm
+	gcc -o graphollock arquivo.o main.o adjacent_matrix.o drawing_core.o Data/queue.o -lm
 
 arquivo.o: arquivo.h
 	gcc -c arquivo.c 

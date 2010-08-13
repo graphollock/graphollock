@@ -1,4 +1,5 @@
 #include "drawing_core.h"
+#include "Data/queue.h"
 #include <math.h>
 
 
@@ -21,26 +22,46 @@ float VectorSize(int x, int y){
 */
 void InitialLayout(Vertice* v, int l, UINT **m){
 	int i;
-	int f[l];
+	queue *q;
 	UINT vid;
-	/*posicionamento antigo*/
-	/*for (i = 0; i < l; i++){
-		if (i % 2 == 0){
-			v[i].y = i + 100;
-			v[i].x = i;
-		}
-		else{
-			v[i].x = i + 100;
-			v[i].y = i;
-		}
-	}*/
+	int *visited = (int*)calloc(l, sizeof(int));
+	
 	/*Vertice inicial na origem da circunferencia*/
 	vid = v[0].id;
 	v[0].x = 0;
 	v[0].y = 0;
 	
 	/*Buscar em largura para posicionar todos os outros vertices*/
+	fprintf(stdout, "Creating queue...\n");
+	
+	q = CreateQueue(v[0].id);
 
+	fprintf(stdout, "Starting a BFS...\n");
+
+	while (q->size > 0){
+		int vertex = Dequeue(q);
+		fprintf(stdout, "Visiting the vertex: %i\n", vertex);
+
+		fprintf(stdout, "Retrieving all adjacents vertex...\n");
+		printf("valor de l: %i\n", l);
+		for (i = 0; i < l; i++){
+			printf("i: %i, m: %i\n", i, m[vertex-1][i]);
+			if (m[vertex - 1][i] == 1){
+				if (visited[i] == 0){
+					printf("vertex - 1: %i\n", vertex-1);
+
+					fprintf(stdout, "Queueing the vertex(i): %i\n", i);
+					visited[i - 1] = 1;
+
+					Queue(q, i);
+
+					fprintf(stdout, "I have %i vertex on my queue\n", q->size);
+				}
+			}
+		}
+
+		visited[vertex - 1] = 1;
+	}
 }
 
 void ApplyForces(Vertice *v, int l, UINT **m){

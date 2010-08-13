@@ -13,7 +13,6 @@ queue *CreateQueue(int v){
 }
 
 void Queue(queue *q, int v){
-	printf("Enfilando: %i\n", v);
 	node *n = (node*)malloc(sizeof(node));
 
 	n->v = v;
@@ -26,16 +25,24 @@ void Queue(queue *q, int v){
 }
 
 int Dequeue(queue *q){
-	int v = q->head->v;
+	int v;
+ 	
+	v = q->head->v;
+
+	printf("valor de v: %i\n", v);
+
 	node *n = q->head;
+
 
 	q->head = q->head->next;
 
-	free(n);
+	//free(n);
 
 	q->size--;
 
+
 	return v;
+	
 }
 
 void DestroyQueue(queue *q){
