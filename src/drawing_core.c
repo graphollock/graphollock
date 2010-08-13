@@ -1,6 +1,7 @@
 #include "drawing_core.h"
 #include <math.h>
 
+
 int min(int x, int y){
 	return x > y ? y : x;
 }
@@ -13,10 +14,17 @@ float VectorSize(int x, int y){
 	return sqrt(x*x + y*y);
 }
 
-void InitialLayout(Vertice* v, int l){
+/*TODO: Posicionar os vertices de forma 'circular' em discos concentricos*/
+/*Ideia:
+	O primeiro vertice do vetor é posicionado na origem da circunferencia,
+	os seus vizinhos no raio mais externo apartir da origem
+*/
+void InitialLayout(Vertice* v, int l, UINT **m){
 	int i;
-
-	for (i = 0; i < l; i++){
+	int f[l];
+	UINT vid;
+	/*posicionamento antigo*/
+	/*for (i = 0; i < l; i++){
 		if (i % 2 == 0){
 			v[i].y = i + 100;
 			v[i].x = i;
@@ -25,7 +33,14 @@ void InitialLayout(Vertice* v, int l){
 			v[i].x = i + 100;
 			v[i].y = i;
 		}
-	}
+	}*/
+	/*Vertice inicial na origem da circunferencia*/
+	vid = v[0].id;
+	v[0].x = 0;
+	v[0].y = 0;
+	
+	/*Buscar em largura para posicionar todos os outros vertices*/
+
 }
 
 void ApplyForces(Vertice *v, int l, UINT **m){

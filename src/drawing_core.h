@@ -8,7 +8,7 @@
 
 float VectorSize(int,int);
 
-void InitialLayout(Vertice*, int l);
+void InitialLayout(Vertice*, int l, UINT**);
 
 void ApllyForces(Vertice*, int, UINT**);
 
