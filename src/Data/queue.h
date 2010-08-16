@@ -13,6 +13,6 @@ typedef struct queue{
 }queue;
 
 queue *CreateQueue(int);
-void Queue(queue*, int);
-int Dequeue(queue*);
+void Queue(queue *, int);
+int Dequeue(queue *);
 void DestroyQueue(queue *);

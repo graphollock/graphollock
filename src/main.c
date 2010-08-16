@@ -21,8 +21,6 @@ int main (int argc, char **argv){
 	if (!m)
 		return EXIT_FAILURE;
 
-	printf("%i\n", t);
-
 	complete_matrix(argv, m, t, t);
 
 	Vertice *v = CriaVetor(m, t);

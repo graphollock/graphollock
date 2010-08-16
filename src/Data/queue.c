@@ -18,7 +18,7 @@ void Queue(queue *q, int v){
 	n->v = v;
 	n->next = NULL;
 	q->last->next = n;
-
+	
 	q->last = n;
 
 	q->size++;
@@ -29,20 +29,17 @@ int Dequeue(queue *q){
  	
 	v = q->head->v;
 
-	printf("valor de v: %i\n", v);
-
 	node *n = q->head;
 
+	q->head = n->next;
 
-	q->head = q->head->next;
-
-	//free(n);
+	free(n);
 
 	q->size--;
 
+	printf("Antes de retornar (tamanho da fila): %i\n", q->size);
 
-	return v;
-	
+	return v;	
 }
 
 void DestroyQueue(queue *q){
