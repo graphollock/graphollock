@@ -23,18 +23,25 @@ float VectorSize(int x, int y){
 void InitialLayout(Vertice* v, int l, UINT **m){
 	int i;
 	queue *q;
-	UINT vid;
+	UINT vid, np, ns;
 	int *visited = (int*)calloc(l, sizeof(int));
+	float alpha = 360/l;
 	
+	/*Inicializa o nivel pai e o nivel filho*/
+	np = ns = 0;
+
 	/*Vertice inicial na origem da circunferencia*/
 	vid = v[0].id;
 	v[0].x = 0;
 	v[0].y = 0;
 	
+	/*Incrementa nivel do filho*/
+	ns++;
+
 	/*Buscar em largura para posicionar todos os outros vertices*/
 	fprintf(stdout, "Creating queue...\n");
 	
-	q = CreateQueue(100 * (l * l));	
+	q = CreateQueue(l * l);	
 	
 	InitQueue(q, v[0].id);
 
@@ -53,6 +60,9 @@ void InitialLayout(Vertice* v, int l, UINT **m){
 					visited[i] = 1;
 					
 					Queue(q, i + 1);
+
+					/*Calculo da posicao do filho*/
+					v[vertex - 1].x = sin(alpha) * (ns * RADIUS);				
 
 					fprintf(stdout, "I have %i vertex on my queue\n", q->end - q->start);
 				}
