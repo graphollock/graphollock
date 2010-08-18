@@ -32,27 +32,29 @@ void InitialLayout(Vertice* v, int l, UINT **m){
 	v[0].y = 0;
 	
 	/*Buscar em largura para posicionar todos os outros vertices*/
-	//fprintf(stdout, "Creating queue...\n");
+	fprintf(stdout, "Creating queue...\n");
 	
-	q = CreateQueue(v[0].id);
+	q = CreateQueue(100 * (l * l));	
+	
+	InitQueue(q, v[0].id);
 
-	//fprintf(stdout, "Starting a BFS...\n");
+	fprintf(stdout, "Starting a BFS...\n");
 
-	while (q->size > 0){
+	while (q->start != q->end){
 		int vertex = Dequeue(q);
-		//fprintf(stdout, "Visiting the vertex: %i\n", vertex);
+		fprintf(stdout, "Visiting the vertex: %i\n", vertex);
 
-//		fprintf(stdout, "Retrieving all adjacents vertex...\n");
+		fprintf(stdout, "Retrieving all adjacents vertex...\n");
 		for (i = 0; i < l; i++){
 			printf("i: %i\n", i);
 			if (m[vertex - 1][i] == 1){
 				if (visited[i] == 0){
-					//fprintf(stdout, "Queueing the vertex(i): %i\n", i);
+					fprintf(stdout, "Queueing the vertex(i): %i\n", i);
 					visited[i] = 1;
 					
 					Queue(q, i + 1);
 
-					fprintf(stdout, "I have %i vertex on my queue\n", q->size);
+					fprintf(stdout, "I have %i vertex on my queue\n", q->end - q->start);
 				}
 			}
 		}

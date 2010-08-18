@@ -17,7 +17,7 @@ queue.o: Data/queue.h
 	gcc -c Data/queue.c
 
 clean:
-	rm graphollock main.o drawing_core.o adjacent_matrix.o arquivo.o
+	rm graphollock main.o drawing_core.o adjacent_matrix.o arquivo.o Data/queue.o
 
 DQ:
 	gcc -o Data/queue Data/queue.c -DDEBUGQUEUE

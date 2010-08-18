@@ -1,50 +1,46 @@
 #include "queue.h"
 
-queue *CreateQueue(int v){
-	queue *q = (queue*)malloc(sizeof(Queue));
-	q->head = q->last = (node*)malloc(sizeof(node));
-
-	q->head->v = v;
-	q->head->next = NULL;
-
-	q->size = 1;
+queue *CreateQueue(int s){
+	queue *q = (queue*)malloc(sizeof(queue));
+	
+	q->data = (int*)malloc(s * sizeof(int));
+	q->start = 0;
+	q->end = 0;
+	q->size = s;
+	
 
 	return q;
 }
 
 void Queue(queue *q, int v){
-	node *n = (node*)malloc(sizeof(node));
+	/*Caso em que o final da pilha ultrapassa o tamanho dela. Não existe espaco suficientepara a insercao de um novo valor*/
+	if (q->end >= q->size){
+		fprintf(stderr, "Don't have space enought in the queue...fisinhing....\n");
+		exit(ENOMEM);
+	}
 
-	n->v = v;
-	n->next = NULL;
-	q->last->next = n;
-	
-	q->last = n;
-
-	q->size++;
+	q->data[q->end++] = v;	
 }
 
 int Dequeue(queue *q){
-	int v;
- 	
-	v = q->head->v;
+	if (q->start >= q->end){
+		fprintf(stderr, "Don't have space enought in the queue...fisinhing....\n");
+		exit(ENOMEM);
+	}
 
-	node *n = q->head;
-
-	q->head = n->next;
-
-	free(n);
-
-	q->size--;
-
-	printf("Antes de retornar (tamanho da fila): %i\n", q->size);
-
-	return v;	
+	return q->data[q->start++];
 }
 
 void DestroyQueue(queue *q){
-	free(q->head);
+	free(q->data);
 	free(q);
+}
+
+void InitQueue(queue *q, int v){
+	printf("entrou aqui\n");
+	q->data[0] = v;
+	q->start = 0;
+	q->end = 1;
 }
 
 #ifdef DEBUGQUEUE
