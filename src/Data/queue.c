@@ -37,7 +37,6 @@ void DestroyQueue(queue *q){
 }
 
 void InitQueue(queue *q, int v){
-	printf("entrou aqui\n");
 	q->data[0] = v;
 	q->start = 0;
 	q->end = 1;

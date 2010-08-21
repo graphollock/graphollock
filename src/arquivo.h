@@ -9,14 +9,16 @@ Contem a estrutura de representacao de um vertice no plano*/
 typedef unsigned int UINT;
 
 typedef struct Vertice{
-	UINT x;
-	UINT y;
+	float x;
+	float y;
 
 	UINT tam;
 	UINT id;
 
 	UINT xdisp;
 	UINT ydisp;
+
+	UINT depth;
 }Vertice;
 
 void GerarArquivo(Vertice*, char*, int, UINT**);

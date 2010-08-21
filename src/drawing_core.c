@@ -25,7 +25,7 @@ void InitialLayout(Vertice* v, int l, UINT **m){
 	queue *q;
 	UINT vid, np, ns;
 	int *visited = (int*)calloc(l, sizeof(int));
-	float alpha = 360/l;
+	float diff = 360/l;
 	
 	/*Inicializa o nivel pai e o nivel filho*/
 	np = ns = 0;
@@ -34,6 +34,7 @@ void InitialLayout(Vertice* v, int l, UINT **m){
 	vid = v[0].id;
 	v[0].x = 0;
 	v[0].y = 0;
+	v[0].depth = np;
 	
 	/*Incrementa nivel do filho*/
 	ns++;
@@ -45,31 +46,48 @@ void InitialLayout(Vertice* v, int l, UINT **m){
 	
 	InitQueue(q, v[0].id);
 
+
 	fprintf(stdout, "Starting a BFS...\n");
 
 	while (q->start != q->end){
 		int vertex = Dequeue(q);
+		static float alpha = 0;
 		fprintf(stdout, "Visiting the vertex: %i\n", vertex);
 
 		fprintf(stdout, "Retrieving all adjacents vertex...\n");
 		for (i = 0; i < l; i++){
-			printf("i: %i\n", i);
 			if (m[vertex - 1][i] == 1){
+				/*angulo inicial*/
 				if (visited[i] == 0){
-					fprintf(stdout, "Queueing the vertex(i): %i\n", i);
-					visited[i] = 1;
 					
+					visited[i] = 1;
+
+					fprintf(stdout, "Queueing the vertex: %i\n", i + 1);
+
 					Queue(q, i + 1);
 
-					/*Calculo da posicao do filho*/
-					v[vertex - 1].x = sin(alpha) * (ns * RADIUS);				
+					v[i].depth = v[vertex - 1].depth + 1;
+
 
 					fprintf(stdout, "I have %i vertex on my queue\n", q->end - q->start);
+
 				}
 			}
 		}
 
 		visited[vertex - 1] = 1;
+
+		/*Calculo da posicao do filho*/
+		v[vertex - 1].y = sin(alpha) * (v[vertex - 1].depth * RADIUS);
+		v[vertex - 1].x = cos(alpha) * (v[vertex - 1].depth * RADIUS);
+
+		fprintf(stdout, "Walking alpha (%.3f) %.3f degrees...\n", alpha, diff);
+		alpha += diff;
+
+		/*TODO: tratar caso em que alpha passa de 360*/
+
+		fprintf(stdout, "Putting the vertex: %i at (%f, %f)\n", vertex, v[vertex - 1].x, v[vertex - 1].y);
+
 	}
 }
 
@@ -155,7 +173,7 @@ void ApplyForces(Vertice *v, int l, UINT **m){
 			/*limita y dentro do frame*/
 			v[k].y = min((int)floor(H/2), max((int)(floor(-H/2)), v[k].y));
 
-			printf("Posicionando o vertice: %i, nas coordenadas (%i,%i)\n", v[k].id, v[k].x, v[k].y);
+			printf("Posicionando o vertice: %i, nas coordenadas (%.2f,%.2f)\n", v[k].id, v[k].x, v[k].y);
 			
 		}
 

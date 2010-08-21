@@ -4,7 +4,7 @@
 #define H 600
 #define A 480000
 #define ITERATIONS 1
-#define RADIUS 10
+#define RADIUS 100
 
 
 float VectorSize(int,int);

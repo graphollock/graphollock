@@ -37,7 +37,7 @@ void DeclaraVertices(FILE *f, Vertice *v, int vcount){
 
 	for (i = 0; i < vcount; i++){
 		InsereTabs(f);
-		fprintf(f, "%i [pos=\"%i,%i\", width=\"0.30\", height=\"0.30\"]\n", v[i].id, v[i].x, v[i].y);
+		fprintf(f, "%i [pos=\"%.3f,%.3f\", width=\"0.30\", height=\"0.30\"]\n", v[i].id, v[i].x, v[i].y);
 	}
 }
 

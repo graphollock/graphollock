@@ -30,7 +30,6 @@ int main (int argc, char **argv){
 	/*ApplyForces(v, t, m);*/
 
 	GerarArquivo(v, argv[2], t, m);
-	print_matrix(m, t, t);
 
 
 	return EXIT_SUCCESS;
