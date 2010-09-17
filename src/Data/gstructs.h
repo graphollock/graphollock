@@ -9,6 +9,7 @@ typedef enum EventType{
 
 /*Representa uma aresta*/
 typedef struct Edge{
+	UINT id;
 	UINT endpoint1;
 	UINT endpoint2;
 }Edge;
@@ -29,11 +30,24 @@ typedef struct EventList{
 	UINT size;
 }EventList;
 
+/*Informacao do evento*/
+typedef struct EventInformation{
+	Edge e;
+	EventType etype;
+}EventInformation;
+
+/*EID = Edge ID*/
+typedef EventInformation* Newspapper;
+typedef UINT EID;
+typedef EID* Sched;
+
+
+/*Estrutura antiga*/
 /*Definindo jornal e lista*/
-typedef EventList Newspapper;
+/*typedef EventList Newspapper;
 typedef EventList Sched;
 
-/*Funcoes de jornal*/
+ *Funcoes de jornal
 Newspapper *CreateNP(Edge, EventType);
 void InsertEvent(Newspapper*, Edge, EventType);
-Node *GetNodeAt(Newspapper *np, int index);
+Node *GetNodeAt(Newspapper *np, int index);*/

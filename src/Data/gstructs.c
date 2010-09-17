@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include "gstructs.h"
 
-/*Cria um novo jornal*/
+
+/*Funcoes antigas*/
+/*Cria um novo jornal
 Newspapper *CreateNP(Edge e, EventType et){
 	EventList *el = (EventList*)malloc(sizeof(EventList));
 
@@ -18,7 +20,7 @@ Newspapper *CreateNP(Edge e, EventType et){
 	return (Newspapper*)el;
 }
 
-/*Insere no jornal*/
+Insere no jornal
 void InsertEvent(Newspapper *np, Edge e, EventType et){
 	Node *n = (Node*)malloc(sizeof(Node));
 
@@ -38,4 +40,13 @@ Node *GetNodeAt(Newspapper *np, int index){
 	int i = 0;
 
 	return np->head + index;	
+}*/
+
+
+Newspapper *CreateNP(int size){
+	return (Newspapper*)malloc(size * sizeof(EventInformation));
+}
+
+void DestroyNP(Newspapper *np){
+		free(np);
 }
