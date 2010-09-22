@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include "gstructs.h"
 
+/*
+	Agenda ----> todas as arestas
+	Jornal ----> ativas no momento
+*/
 
 /*Funcoes antigas*/
 /*Cria um novo jornal
@@ -43,10 +47,10 @@ Node *GetNodeAt(Newspapper *np, int index){
 }*/
 
 
-Newspapper *CreateNP(int size){
-	return (Newspapper*)malloc(size * sizeof(EventInformation));
+Sched *CreateSched(int size){
+	return (Sched*)malloc(size * sizeof(EventInformation));
 }
 
-void DestroyNP(Newspapper *np){
-		free(np);
+void DestroySched(Sched *sc){
+		free(sc);
 }

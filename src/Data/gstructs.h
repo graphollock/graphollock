@@ -17,7 +17,7 @@ typedef struct Edge{
 
 /*Estruturas necessarias para implementacao de jornal
   e agenda*/
-typedef struct Node{
+/*typedef struct Node{
 	Edge e;
 	EventType event;
 	struct Node *next;
@@ -28,19 +28,23 @@ typedef struct EventList{
 	Node *head;
 	Node *tail;
 	UINT size;
-}EventList;
+}EventList;*/
 
 /*Informacao do evento*/
 typedef struct EventInformation{
-	Edge e;
+	Edge *e;
 	EventType etype;
 }EventInformation;
 
 /*EID = Edge ID*/
-typedef EventInformation* Newspapper;
+typedef EventInformation* Sched;
 typedef UINT EID;
-typedef EID* Sched;
+typedef EID* NPaper;
 
+
+/*Funcoes*/
+void DestroySched(Sched*);
+Sched *CreateSched(int);
 
 /*Estrutura antiga*/
 /*Definindo jornal e lista*/
