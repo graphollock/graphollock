@@ -5,7 +5,6 @@
 	Historico:
 		* 22/09/2010 - Criacao das estruturas;
 */
-#include "../arquivo.h"
 #include "gstructs.h"
 
 /*
@@ -28,6 +27,24 @@ typedef struct Graph{
 	UINT sizev; /*Tamanho do conjunto de vertices*/
 	UINT sizee; /*Tamanho do conjunto de arestas*/
 }Graph;
+
+/*
+	Nó de uma lista de adjacencia
+*/
+typedef struct AdjNode{
+	UINT id;
+	struct AdjNode *next;
+	struct AdjNode *prev;
+}AdjNode;
+
+/*
+	Lista de adjacência
+*/
+typedef struct AdjList{
+	AdjNode *begin;
+	AdjNode *end;
+	UINT size;
+}AdjList;
 
 /*
 	Forma de leitura do arquivo
