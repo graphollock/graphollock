@@ -22,10 +22,11 @@ typedef struct AdjMatrix{
 typedef struct Graph{
 	AdjMatrix *am; /*Matriz de adjacencia*/
 	Edge *e; /*Conjunto de arestas*/
-	AdjList *al; /*Listas de adjacencia*/
+	struct AdjList *al; /*Listas de adjacencia*/
 	Vertice *v; /*Conjunto de vertices*/
 	UINT sizev; /*Tamanho do conjunto de vertices*/
 	UINT sizee; /*Tamanho do conjunto de arestas*/
+	UINT last_epos; /*Ultima posicao ocupada do vetor de arestas*/
 }Graph;
 
 /*
@@ -50,8 +51,8 @@ typedef struct AdjList{
 	Forma de leitura do arquivo
 */
 typedef enum ReadFlag{
-	MTR_READ = 'M'; /*Forma de leitura padrão - Matriz de adjacencia*/
-	EDG_READ = 'L'; /*Forma de leitura por arestas - a - b => e={a;b}*/
+	MTR_READ = 'M', /*Forma de leitura padrão - Matriz de adjacencia*/
+	EDG_READ = 'L' /*Forma de leitura por arestas - a - b => e={a;b}*/
 }ReadFlag;
 
 /*
@@ -60,7 +61,7 @@ typedef enum ReadFlag{
 				Modo de leitura
 	Retorno: Estrutura de grafo
 */
-Graph *ReadFile(char*,ReadFlag);
+Graph *ReadFile(char *path, ReadFlag rtype, int n);
 
 /*
 	Descricao: Retorna a primeira aresta do grafo
@@ -75,3 +76,15 @@ Edge *FirstEdge(Graph*);
 	Retorno: Aresta caso exista/null caso não haja nenhuma
 */
 Edge *NextEdge(Graph*);
+
+/*
+	Descricao: Insere aresta na lista de arestas
+	Parametros: Grafo, aresta
+*/
+void InsertEdge(Graph *g, Edge *e);
+
+/*
+	Descricao: Lista todas as arestas de G
+	Parametros: Grafo
+*/
+void FindAllEdges(Graph *g);

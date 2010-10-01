@@ -1,4 +1,4 @@
-all: arquivo.o adjacent_matrix.o drawing_core.o main.o Data/queue.o Data/gstructs.o
+all: arquivo.o adjacent_matrix.o drawing_core.o main.o Data/queue.o Data/gstructs.o Data/graphlib.o
 	gcc -o graphollock arquivo.o main.o adjacent_matrix.o drawing_core.o Data/queue.o Data/gstructs.o -lm -ggdb
 
 arquivo.o: arquivo.h
@@ -19,8 +19,11 @@ queue.o: Data/queue.h
 gstructs.o: Data/gstructs.h
 	gcc -c Data/gstructs.c
 
+graphlib.o: Data/graphlib.h
+	gccc -c Data/graphlib.c
+
 clean:
-	rm graphollock main.o drawing_core.o adjacent_matrix.o arquivo.o Data/queue.o Data/gstructs.o
+	rm graphollock main.o drawing_core.o adjacent_matrix.o arquivo.o Data/queue.o Data/gstructs.o Data/graphlib.o
 
 DQ:
 	gcc -o Data/queue Data/queue.c -DDEBUGQUEUE
