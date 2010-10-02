@@ -24,7 +24,7 @@ void destroy_matrix(unsigned int **m, int l, int c)
 	free(m);
 }
 
-void complete_matrix(char **param, unsigned int **m, int l, int c)
+void complete_matrix(char *path, unsigned int **m, int l, int c)
 {
 	int i = 0;
 	size_t len = 0;
@@ -34,7 +34,7 @@ void complete_matrix(char **param, unsigned int **m, int l, int c)
 
 	line = (char*)malloc((size + 1) * sizeof(char));
 
-	FILE *in = fopen(*(param + 1), "r");
+	FILE *in = fopen(path, "r");
 	if (!in) exit(EXIT_FAILURE);
 
 	while (getline(&line, &len, in) != -1 && !feof(in) && !ferror(in)){
@@ -62,12 +62,12 @@ void handle_line(unsigned int **m, char *line, int l, int actual_line)
 }
 
 
-int order_of_matrix(char **param)
-{
+int order_of_matrix(char *path)
+{	
 	char *line = NULL;
 	size_t len = 0;
 
-	FILE *in = fopen(*(param + 1), "r");
+	FILE *in = fopen(path, "r");
 	if (!in) exit(EXIT_FAILURE);
 
 	getline(&line, &len, in);

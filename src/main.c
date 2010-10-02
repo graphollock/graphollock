@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "adjacent_matrix.h"
-#include "drawing_core.h"
+#include "Data/graphlib.h"
+/*#include "adjacent_matrix.h"
+#include "drawing_core.h"*/
 
 
 /*ordem dos parametros:
@@ -10,13 +11,22 @@
 */
 
 int main (int argc, char **argv){
+	printf("lendo o arquivo...\n");
+	Graph *g = ReadFile(argv[1], MTR_READ, 0);
+
+	printf("Tamanho de V(G): %d\n", g->sizev);
+	printf("Tamanho de E(G): %d\n", g->sizee);
+
+	int i;
+	for ( i = 0; i < 3; i++)
+		printf("{%d;%d}\n", g->e[i].endpoint1, g->e[i].endpoint2);
 
 
-	int t = order_of_matrix(argv);
+	/*int t = order_of_matrix(argv);*/
 
 
 
-	unsigned int **m = allocate_matrix(t, t);
+	/*UINT **m = allocate_matrix(t, t);
 
 	if (!m)
 		return EXIT_FAILURE;
@@ -27,9 +37,9 @@ int main (int argc, char **argv){
 
 	InitialLayout(v, t, m);
 
-	/*ApplyForces(v, t, m);*/
+	ApplyForces(v, t, m);
 
-	GerarArquivo(v, argv[2], t, m);
+	GerarArquivo(v, argv[2], t, m);*/
 
 
 	return EXIT_SUCCESS;

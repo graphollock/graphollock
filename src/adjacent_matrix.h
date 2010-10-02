@@ -9,8 +9,8 @@
 /* allocate and return a adjacent matrix */
 unsigned int **allocate_matrix(int, int);
 void destroy_matrix(unsigned int **, int, int);
-void complete_matrix(char **, unsigned int **, int, int);
-int order_of_matrix(char **);
+void complete_matrix(char *, unsigned int **, int, int);
+int order_of_matrix(char *);
 void print_matrix(unsigned int **, int, int);
 void handle_line(unsigned int **, char *, int, int);
 
