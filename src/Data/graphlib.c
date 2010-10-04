@@ -65,10 +65,10 @@ Edge *FirstEdge(Graph *g){
 void FindAllEdges(Graph *g){
 	int i, j;
 	/*Procura a primeira aresta*/
-	Edge *e = FirstEdge(g);
+	/*Edge *e = FirstEdge(g);*/
 	
 	/*Insere a primeira aresta na lista*/
-	g->e[g->last_epos] = *e;
+	/*g->e[g->last_epos] = *e;*/
 
 	g->last_epos++;
 
@@ -79,13 +79,17 @@ void FindAllEdges(Graph *g){
 		g->e[g->last_epos] = *e;
 		g->last_epos++;
 	}*/
+
+	printf("|V(G)| = %d\n", g->sizev);
+
 	for (i = 0; i < g->sizev - 1; i++){
-		for (j = i+1; j < g->sizev - 1; j++){
+		for (j = i + 1; j <= g->sizev - 1; j++){
 			printf("i, j: %d,%d\n", i, j);
 			if (g->am->m[i][j] == 1){
 				Edge *e = (Edge*)malloc(sizeof(Edge));
 				e->endpoint1 = i;
 				e->endpoint2 = j;
+				printf("endpoint2: %d\n", j);
 				g->e[g->last_epos] = *e;
 				
 				g->sizee++;
