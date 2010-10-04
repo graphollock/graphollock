@@ -19,7 +19,10 @@ int main (int argc, char **argv){
 
 	int i;
 	for ( i = 0; i < 3; i++)
-		printf("{%d;%d}\n", g->e[i].endpoint1, g->e[i].endpoint2);
+		printf("(%d,{%d;%d})\n", g->e[i].id, g->e[i].endpoint1, g->e[i].endpoint2);
+
+	for ( i = 0; i < 3; i++)
+		printf("%d\n", g->v[i].id);
 
 
 	/*int t = order_of_matrix(argv);*/

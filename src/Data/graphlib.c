@@ -33,6 +33,13 @@ Graph *ReadFile(char *path, ReadFlag rtype, int n){
 		/*Aloca E*/
 		g->e = (Edge*)malloc(size * size * sizeof(Edge));
 
+		/*Aloca V*/
+		g->v = (Vertice*)malloc(size * sizeof(Vertice));
+
+		/*Insere os vertices*/
+		for (i = 0; i < size; i++)
+			g->v[i].id = i + 1;
+
 		/*le a matriz do arquivo pra dentro da matriz de adjacencia*/
 		complete_matrix(path, g->am->m, size, size);
 	
@@ -64,70 +71,22 @@ Edge *FirstEdge(Graph *g){
 
 void FindAllEdges(Graph *g){
 	int i, j;
-	/*Procura a primeira aresta*/
-	/*Edge *e = FirstEdge(g);*/
+	UINT eid = 1;
 	
-	/*Insere a primeira aresta na lista*/
-	/*g->e[g->last_epos] = *e;*/
-
-	g->last_epos++;
-
-	/*Enquanto tiver proximas arestas*/
-	/*while ((e = NextEdge(g)) != NULL){
-		printf("contabilizando arestas...\n");
-		printf("%p\n", e);
-		g->e[g->last_epos] = *e;
-		g->last_epos++;
-	}*/
-
 	printf("|V(G)| = %d\n", g->sizev);
 
-	for (i = 0; i < g->sizev - 1; i++){
+	for (i = 0; i <= g->sizev - 1; i++){
 		for (j = i + 1; j <= g->sizev - 1; j++){
 			printf("i, j: %d,%d\n", i, j);
 			if (g->am->m[i][j] == 1){
-				Edge *e = (Edge*)malloc(sizeof(Edge));
-				e->endpoint1 = i;
-				e->endpoint2 = j;
-				printf("endpoint2: %d\n", j);
-				g->e[g->last_epos] = *e;
-				
-				g->sizee++;
+				g->e[g->last_epos].endpoint1 = i + 1;
+				g->e[g->last_epos].endpoint2 = j + 1;			
+				g->e[g->last_epos].id = eid;
 
-				free(e);
+				g->sizee++;
+				g->last_epos++;
+				eid++;
 			}
 		}
 	}
 }
-
-Edge *NextEdge(Graph *g){
-	
-}
-
-
-/*TODO: Transferir para Lista de adjacencia*/
-/*void InsertEdge(Graph *g, Edge *e){
-	AdjNode *n = (AdjNode*)malloc(sizeof(AdjNode));
-
-	Alocacao falhou
-	if (!n){
-		fprintf(stdout, "Memory allocate error, aborting...\n");
-		Erro de memória
-		exit(ENOMEM);
-	}
-	
-	atribui o ID da aresta do valor do no
-	n->id = e->id;
-
-	O anterior do novo no sera o ultimo no da lista
-	n->prev = g->AdjList->end;
-
-	Aterra ponteiro de proximo do novo no
-	n->next = NULL;
-	
-	Referencia novo no no ultimo existente na lista
-	g->AdjList->end->next = e;
-
-	Aponta o final da lista para o novo no
-	g->AdjList->end = n;
-}*/
