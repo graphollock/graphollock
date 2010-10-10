@@ -52,7 +52,8 @@ typedef struct AdjList{
 */
 typedef enum ReadFlag{
 	MTR_READ = 'M', /*Forma de leitura padrão - Matriz de adjacencia*/
-	EDG_READ = 'L' /*Forma de leitura por arestas - a - b => e={a;b}*/
+	EDG_READ = 'L', /*Forma de leitura por arestas - a - b => e={a;b}*/
+	PAR_READ = 'P' /*Forma de leitura por pares - a b => e={a;b}*/
 }ReadFlag;
 
 /*
@@ -87,4 +88,10 @@ void InsertEdge(Graph *g, Edge *e);
 	Descricao: Lista todas as arestas de G
 	Parametros: Grafo
 */
-void FindAllEdges(Graph *g);
+void FindAllEdges(Graph *);
+
+/*
+	Descricao: Cria a lista de adjacencia de G
+	Parametros: Grafo
+*/
+void CreateAdjList(Graph *);
