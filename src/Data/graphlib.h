@@ -6,6 +6,12 @@
 		* 22/09/2010 - Criacao das estruturas;
 */
 #include "gstructs.h"
+#define TRUE 1
+#define FALSE 0
+/*
+	Tipo booleano
+*/
+typedef int BOOL;
 
 /*
 	Matriz de adjacencia e dados auxiliares para manipulacao
@@ -62,7 +68,7 @@ typedef enum ReadFlag{
 				Modo de leitura
 	Retorno: Estrutura de grafo
 */
-Graph *ReadFile(char *path, ReadFlag rtype, int n);
+Graph *ReadFile(char *path, ReadFlag rtype, int *n);
 
 /*
 	Descricao: Retorna a primeira aresta do grafo
@@ -80,9 +86,9 @@ Edge *NextEdge(Graph*);
 
 /*
 	Descricao: Insere aresta na lista de arestas
-	Parametros: Grafo, aresta
+	Parametros: Grafo, u e v da aresta
 */
-void InsertEdge(Graph *g, Edge *e);
+void InsertEdge(Graph *, int, int);
 
 /*
 	Descricao: Lista todas as arestas de G
@@ -91,7 +97,7 @@ void InsertEdge(Graph *g, Edge *e);
 void FindAllEdges(Graph *);
 
 /*
-	Descricao: Cria a lista de adjacencia de G
+	Descricao: Atualiza a lista de adjacencia de G
 	Parametros: Grafo
 */
-void CreateAdjList(Graph *);
+void UpdateAdjList(Graph *, int, int, BOOL);

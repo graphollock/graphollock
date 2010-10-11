@@ -3,14 +3,15 @@
 #include <errno.h>
 #include "graphlib.h"
 
-Graph *ReadFile(char *path, ReadFlag rtype, int n){
+Graph *ReadFile(char *path, ReadFlag rtype, int *n){
 	Graph *g = (Graph*)malloc(sizeof(Graph));
+	int i, size, u, v;
 	
 	switch (rtype){
 		case 'M':
-			int i;
+			i;
 			/*Numero de vertices do grafo*/
-	    	int size = order_of_matrix(path);
+	    	size = order_of_matrix(path);
 
 			/*Tamanho de v*/
 			g->sizev = size;
@@ -48,6 +49,39 @@ Graph *ReadFile(char *path, ReadFlag rtype, int n){
 			FindAllEdges(g);
 		break;
 		case 'P':
+			fscanf(stdin, "%d", n);
+			
+			g->v = (Vertice*)malloc((*n) * sizeof(Vertice));
+
+			g->sizev = (*n);
+
+			/*Adiciona os vertices*/
+			for (i = 0; i < (*n); i++)
+				g->v[i].id = i + 1;
+
+			/*Aloca E*/
+			g->e = (Edge*)malloc((*n) * (*n) * sizeof(Edge));
+
+			/*Aloca estrutura de matriz*/
+			g->am = (AdjMatrix*)malloc(sizeof(AdjMatrix));
+
+			/*Aloca a matriz*/
+			g->am->m = (UINT**)calloc((*n), sizeof(UINT*));
+
+			/*Aloca as linhas da matriz*/
+			for (i = 0; i < (*n); i++)
+				g->am->m[i] = (UINT*)calloc((*n),  sizeof(UINT));
+
+			while (!feof(stdin) && fscanf(stdin, "%d %d", &u, &v) == 2){
+				/*Le as arestas*/
+				/*fscanf(stdin, "%d %d", &u, &v);*/
+				
+				/*Insere as arestas*/
+				InsertEdge(g, u, v);
+
+				/*Atualiza lista de adjacencia*/
+				UpdateAdjList(g, u, v, TRUE);
+			}
 			
 		break;
 		default:
@@ -56,6 +90,7 @@ Graph *ReadFile(char *path, ReadFlag rtype, int n){
 		break;
 
 	}
+
 	return g;
 }
 
@@ -93,7 +128,7 @@ void FindAllEdges(Graph *g){
 				g->e[g->last_epos].id = eid;
 
 				/*Atualiza lista de adjacencia*/
-				UpdateAdjList(g, i, j);
+				/*UpdateAdjList(g, i, j);*/
 				g->sizee++;
 				g->last_epos++;
 				eid++;
@@ -103,6 +138,59 @@ void FindAllEdges(Graph *g){
 }
 
 
-void UpdateAdjList(Graph *g, int u, int v){
-	
+void InsertEdge(Graph *g, int u, int v){
+	static int i = 1;
+	g->e[g->last_epos].endpoint1 = u;
+	g->e[g->last_epos].endpoint2 = v;
+	g->e[g->last_epos].id = i;
+
+	g->am->m[u - 1][v - 1] = 1;
+
+	i++;
+	g->last_epos++;
+	g->sizee++;
+}
+
+/*Insere em l[u] o vertice v*/
+void UpdateAdjList(Graph *g, int u, int v, BOOL sim){
+	AdjNode *n = (AdjNode*)malloc(sizeof(AdjNode));
+
+	if (!n){
+		fprintf(stderr, "Error on creating a new AdjNode...\n");
+		exit(ENOMEM);
+	}
+
+	/*Se a lista nao existir ainda, cria ela*/
+	if (!g->al){
+		int i = 0;
+		g->al = (AdjList*)malloc(g->sizev * sizeof(AdjList));
+
+		/*Limpa todos os elementos para garantir seguranca*/
+		for (i = 0; i < g->sizev; i++){
+			g->al[i].begin = g->al[i].end = NULL;
+			g->al[i].size = 0;
+		}
+	}
+
+	if (g->al[u - 1].size == 0){
+		n->id = v;
+
+		n->prev = n->next = NULL;
+
+		g->al[u - 1].begin = g->al[u - 1].end = n;
+		
+		g->al[u - 1].size++;
+	}else{
+		n->id = v;
+		
+		/*Inserindo n na lista*/
+		n->prev = g->al[u - 1].end;
+		g->al[u - 1].end->next = n;
+		g->al[u - 1].end = n;
+
+		g->al[u - 1].size++;
+	}
+
+	if (sim == TRUE)
+		UpdateAdjList(g, v, u, FALSE);
 }

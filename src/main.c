@@ -11,7 +11,7 @@
 */
 
 int main (int argc, char **argv){
-	printf("lendo o arquivo...\n");
+	/*printf("lendo o arquivo...\n");
 	Graph *g = ReadFile(argv[1], MTR_READ, 0);
 
 	printf("Tamanho de V(G): %d\n", g->sizev);
@@ -22,7 +22,22 @@ int main (int argc, char **argv){
 		printf("(%d,{%d;%d})\n", g->e[i].id, g->e[i].endpoint1, g->e[i].endpoint2);
 
 	for ( i = 0; i < 3; i++)
-		printf("%d\n", g->v[i].id);
+		printf("%d\n", g->v[i].id);*/
+	int n, i;
+
+	Graph *g = ReadFile(NULL, PAR_READ, &n);
+
+	for(i = 0; i < n; i++){
+		AdjNode *n = g->al[i].begin;
+		printf("Vertice %d: [ d(%d) = %d ] \n", i + 1, i + 1, g->al[i].size);
+		while (n){
+			printf("%d ", n->id);
+
+			n = n->next;
+		}
+
+		printf("\n");
+	}
 
 
 	/*int t = order_of_matrix(argv);*/
