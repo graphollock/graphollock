@@ -33,7 +33,21 @@ typedef struct Graph{
 	UINT sizev; /*Tamanho do conjunto de vertices*/
 	UINT sizee; /*Tamanho do conjunto de arestas*/
 	UINT last_epos; /*Ultima posicao ocupada do vetor de arestas*/
+	UINT *in; /*O vetor chega para Busca em Profundidade*/
+	UINT *out; /*O vetor sai para a Busca em Profundidade*/
+	UINT count; /*Contador para a Busca em Profundidade*/
+	void *slotinfo1; /*'Slot' de informacao (adiciona informacao extra ao grafo)*/
 }Graph;
+
+/*
+	Buffer de impressao
+*/
+
+typedef struct{
+	char **eorder;
+	int *vorder;
+	int laste, lastv;
+}PrintBuffer;
 
 /*
 	Nó de uma lista de adjacencia

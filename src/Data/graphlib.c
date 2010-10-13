@@ -39,8 +39,10 @@ Graph *ReadFile(char *path, ReadFlag rtype, int *n){
 			g->v = (Vertice*)malloc(size * sizeof(Vertice));
 
 			/*Insere os vertices*/
-			for (i = 0; i < size; i++)
+			for (i = 0; i < size; i++){
 				g->v[i].id = i + 1;
+				g->v[i].visited = 0;
+			}
 
 			/*le a matriz do arquivo pra dentro da matriz de adjacencia*/
 			complete_matrix(path, g->am->m, size, size);
@@ -56,8 +58,10 @@ Graph *ReadFile(char *path, ReadFlag rtype, int *n){
 			g->sizev = (*n);
 
 			/*Adiciona os vertices*/
-			for (i = 0; i < (*n); i++)
+			for (i = 0; i < (*n); i++){
 				g->v[i].id = i + 1;
+				g->v[i].visited = 0;
+			}
 
 			/*Aloca E*/
 			g->e = (Edge*)malloc((*n) * (*n) * sizeof(Edge));
@@ -72,10 +76,15 @@ Graph *ReadFile(char *path, ReadFlag rtype, int *n){
 			for (i = 0; i < (*n); i++)
 				g->am->m[i] = (UINT*)calloc((*n),  sizeof(UINT));
 
+			/*aloca os vetores de busca*/
+			g->in = (UINT*)calloc((*n), sizeof(UINT));
+
+			g->out = (UINT*)calloc((*n), sizeof(UINT));
+
+			g->count = 0;
+
+			/*le todas as arestas*/
 			while (!feof(stdin) && fscanf(stdin, "%d %d", &u, &v) == 2){
-				/*Le as arestas*/
-				/*fscanf(stdin, "%d %d", &u, &v);*/
-				
 				/*Insere as arestas*/
 				InsertEdge(g, u, v);
 
