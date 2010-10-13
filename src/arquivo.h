@@ -19,6 +19,8 @@ typedef struct Vertice{
 	UINT ydisp;
 
 	UINT depth;
+
+	UINT visited;
 }Vertice;
 
 void GerarArquivo(Vertice*, char*, int, UINT**);
