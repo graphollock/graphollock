@@ -39,7 +39,11 @@ int main (int argc, char **argv){
 		printf("\n");
 	}
 
-
+	/*Aplica o layout inicial*/
+	InitialLayout(g->v, g->sizev, g->am->m);
+	
+	/*Gera o arquivo .dot*/
+	GerarArquivo(g->v, argv[2], g->sizev, g->am->m);
 	/*int t = order_of_matrix(argv);*/
 
 
