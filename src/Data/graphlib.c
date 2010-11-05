@@ -9,9 +9,8 @@ Graph *ReadFile(char *path, ReadFlag rtype, int *n){
 	
 	switch (rtype){
 		case 'M':
-			i;
 			/*Numero de vertices do grafo*/
-	    	size = order_of_matrix(path);
+	    	*n = size = order_of_matrix(path);
 
 			/*Tamanho de v*/
 			g->sizev = size;
@@ -43,7 +42,7 @@ Graph *ReadFile(char *path, ReadFlag rtype, int *n){
 				g->v[i].id = i + 1;
 				g->v[i].visited = 0;
 			}
-
+	
 			/*le a matriz do arquivo pra dentro da matriz de adjacencia*/
 			complete_matrix(path, g->am->m, size, size);
 	
@@ -84,13 +83,9 @@ Graph *ReadFile(char *path, ReadFlag rtype, int *n){
 			g->count = 0;
 
 			/*le todas as arestas*/
-			while (!feof(stdin) && fscanf(stdin, "%d %d", &u, &v) == 2){
+			while (!feof(stdin) && fscanf(stdin, "%d %d", &u, &v) == 2)
 				/*Insere as arestas*/
 				InsertEdge(g, u, v);
-
-				/*Atualiza lista de adjacencia*/
-				UpdateAdjList(g, u, v, TRUE);
-			}
 			
 		break;
 		default:
@@ -130,14 +125,13 @@ void FindAllEdges(Graph *g){
 
 	for (i = 0; i <= g->sizev - 1; i++){
 		for (j = i + 1; j <= g->sizev - 1; j++){
-			printf("i, j: %d,%d\n", i, j);
 			if (g->am->m[i][j] == 1){
 				g->e[g->last_epos].endpoint1 = i + 1;
 				g->e[g->last_epos].endpoint2 = j + 1;			
 				g->e[g->last_epos].id = eid;
 
 				/*Atualiza lista de adjacencia*/
-				/*UpdateAdjList(g, i, j);*/
+				UpdateAdjList(g, i + 1, j + 1, TRUE);
 				g->sizee++;
 				g->last_epos++;
 				eid++;

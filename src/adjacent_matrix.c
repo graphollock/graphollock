@@ -68,7 +68,7 @@ int order_of_matrix(char *path)
 	size_t len = 0;
 
 	FILE *in = fopen(path, "r");
-	if (!in) exit(EXIT_FAILURE);
+	if (!in)exit(EXIT_FAILURE);
 
 	getline(&line, &len, in);
 

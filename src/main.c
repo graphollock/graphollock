@@ -25,8 +25,8 @@ int main (int argc, char **argv){
 		printf("%d\n", g->v[i].id);*/
 	int n, i;
 
-	Graph *g = ReadFile(NULL, PAR_READ, &n);
-
+	Graph *g = ReadFile(argv[1], MTR_READ, &n);
+	
 	for(i = 0; i < n; i++){
 		AdjNode *n = g->al[i].begin;
 		printf("Vertice %d: [ d(%d) = %d ] \n", i + 1, i + 1, g->al[i].size);

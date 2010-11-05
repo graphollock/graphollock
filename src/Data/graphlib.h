@@ -37,10 +37,14 @@ typedef struct Graph{
 	UINT *out; /*O vetor sai para a Busca em Profundidade*/
 	UINT count; /*Contador para a Busca em Profundidade*/
 	void *slotinfo1; /*'Slot' de informacao (adiciona informacao extra ao grafo)*/
+	void *slotinfo2; /*'Slot' de informacao (adiciona informacao extra ao grafo)*/
+	void *slotinfo3; /*'Slot' de informacao (adiciona informacao extra ao grafo)*/
 }Graph;
 
+#ifdef GGDB
 /*
 	Buffer de impressao
+		Utilizado para imprimir os resultados das buscas (emm caso de debug)
 */
 
 typedef struct{
@@ -48,6 +52,7 @@ typedef struct{
 	int *vorder;
 	int laste, lastv;
 }PrintBuffer;
+#endif
 
 /*
 	Nó de uma lista de adjacencia
