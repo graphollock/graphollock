@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Data/graphlib.h"
-/*#include "adjacent_matrix.h"
-#include "drawing_core.h"*/
+/*#include "adjacent_matrix.h"*/
+#include "drawing_core.h"
 
 
 /*ordem dos parametros:
@@ -38,7 +38,7 @@ int main (int argc, char **argv){
 
 		printf("\n");
 	}
-
+#ifdef DEPREC
 	/*Aplica o layout inicial*/
 	InitialLayout(g->v, g->sizev, g->am->m);
 	
@@ -63,6 +63,6 @@ int main (int argc, char **argv){
 
 	GerarArquivo(v, argv[2], t, m);*/
 
-
+#endif
 	return EXIT_SUCCESS;
 }

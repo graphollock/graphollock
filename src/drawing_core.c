@@ -1,6 +1,5 @@
+#ifdef deprec
 #include "drawing_core.h"
-#include "Data/queue.h"
-#include <math.h>
 
 
 int min(int x, int y){
@@ -91,6 +90,8 @@ void InitialLayout(Vertice* v, int l, UINT **m){
 	}
 }
 
+/*Funcao depreciada*/
+#ifdef DEPREC
 void ApplyForces(Vertice *v, int l, UINT **m){
 	int i, j, k, li, c;
 	int temp = 1000000;
@@ -186,9 +187,31 @@ int AtrForce(int x, int l){
 
 	return (int)floor((double)(x*x/k));
 }
+#endif
 
 int RepForce(int x, int l){
 	int k = (int)floor(sqrt(A/l));
 	
 	return (int)floor((k*k)/x);
 }
+
+
+void StartDrawing(Graph *g){
+	/*Cria o posicionamento inicial dos vertices*/
+	InitialLayout(g->v, g->sizev, g->am->m);
+}
+
+void ApplyPhLaws(Graph *g){
+	double energy;
+	int vcount;
+
+	do{
+		energy = 0;
+		/*Para cada vertice calcula lei de coulumb (atracao) e 
+		lei de hook (repulsao)*/
+		for (vcount = 0; vcount < g->sizev; vcount++){
+			g->v[vcount].forces.x = g->v[v.count].forces.y = 0;
+		}
+	}while(energy > INCERCIA_STATUS)
+}
+#endif

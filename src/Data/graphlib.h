@@ -6,6 +6,7 @@
 		* 22/09/2010 - Criacao das estruturas;
 */
 #include "gstructs.h"
+
 #define TRUE 1
 #define FALSE 0
 /*

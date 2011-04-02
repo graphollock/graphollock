@@ -1,4 +1,4 @@
-#include "../arquivo.h"
+#include "../filecore.h"
 
 typedef enum EventType{
 	/*Inicio de aresta*/

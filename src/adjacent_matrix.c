@@ -1,3 +1,8 @@
+/*
+* Funcoes alteradas para receberem FILE* como parametro, para que possa ser
+* utilizada a entrada padrao para eventual leitura do grafo  
+*/
+
 #include "adjacent_matrix.h"
 
 unsigned int **allocate_matrix(int l, int c)
@@ -24,7 +29,7 @@ void destroy_matrix(unsigned int **m, int l, int c)
 	free(m);
 }
 
-void complete_matrix(char *path, unsigned int **m, int l, int c)
+void complete_matrix(FILE *in, unsigned int **m, int l, int c)
 {
 	int i = 0;
 	size_t len = 0;
@@ -34,8 +39,10 @@ void complete_matrix(char *path, unsigned int **m, int l, int c)
 
 	line = (char*)malloc((size + 1) * sizeof(char));
 
-	FILE *in = fopen(path, "r");
-	if (!in) exit(EXIT_FAILURE);
+	if (!in){
+		fprintf(stderr, "Cannot open the file...aborting...\n");
+		exit(EBADF); /*Bad file descriptor return*/
+	}
 
 	while (getline(&line, &len, in) != -1 && !feof(in) && !ferror(in)){
 		handle_line(m, line, l, i++);
@@ -62,20 +69,25 @@ void handle_line(unsigned int **m, char *line, int l, int actual_line)
 }
 
 
-int order_of_matrix(char *path)
+int order_of_matrix(FILE *in)
 {	
 	char *line = NULL;
 	size_t len = 0;
+	int size;
 
-	FILE *in = fopen(path, "r");
-	if (!in)exit(EXIT_FAILURE);
+	if (!in){
+		fprintf(stderr, "Cannot open the file...aborting\n");
+		exit(EBADF);
+	}
 
 	getline(&line, &len, in);
 
-	fclose(in);
+	size = strlen(line) - 1;
+
+	/*fclose(in);*/ /*O arquivo nao pode ser fechado neste momento*/
 	if (line) free(line);
 
-	return (strlen(line) - 1);
+	return (size);
 }
 
 void print_matrix(unsigned int **m, int l, int c)
