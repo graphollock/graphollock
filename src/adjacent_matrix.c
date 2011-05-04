@@ -71,7 +71,7 @@ void handle_line(unsigned int **m, char *line, int l, int actual_line)
 
 int order_of_matrix(FILE *in)
 {	
-	char *line = NULL;
+	char *line = (char*)malloc(255 * sizeof(char));
 	size_t len = 0;
 	int size;
 
@@ -79,9 +79,10 @@ int order_of_matrix(FILE *in)
 		fprintf(stderr, "Cannot open the file...aborting\n");
 		exit(EBADF);
 	}
-
-	getline(&line, &len, in);
-
+	
+	/*getline(&line, &len, in);*/
+	fscanf(in, "%s", line);
+			
 	size = strlen(line) - 1;
 
 	/*fclose(in);*/ /*O arquivo nao pode ser fechado neste momento*/

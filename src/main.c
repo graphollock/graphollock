@@ -25,6 +25,8 @@ int main (int argc, char **argv){
 		printf("%d\n", g->v[i].id);*/
 	int n, i;
 
+	printf("here...\n");
+
 	Graph *g = ReadFile(argv[1], MTR_READ, &n);
 	
 	for(i = 0; i < n; i++){

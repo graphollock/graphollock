@@ -1,3 +1,5 @@
+#include "drawing_core.h"
+
 #ifdef deprec
 #include "drawing_core.h"
 

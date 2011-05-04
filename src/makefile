@@ -23,7 +23,7 @@ graphlib.o: Data/graphlib.h
 	gcc -c Data/graphlib.c
 
 clean:
-	rm graphollock main.o drawing_core.o adjacent_matrix.o arquivo.o Data/queue.o Data/gstructs.o Data/graphlib.o
+	rm graphollock main.o drawing_core.o adjacent_matrix.o Data/queue.o Data/gstructs.o Data/graphlib.o filecore.o
 
 DQ:
 	gcc -o Data/queue Data/queue.c -DDEBUGQUEUE

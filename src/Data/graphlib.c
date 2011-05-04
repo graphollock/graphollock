@@ -6,11 +6,19 @@
 Graph *ReadFile(char *path, ReadFlag rtype, int *n){
 	Graph *g = (Graph*)malloc(sizeof(Graph));
 	int i, size, u, v;
+	FILE *in = fopen(path, "r");
+
+	if (!in){
+		fprintf(stderr, "Error on opening the source file...\n");
+		exit(EBADF);
+	}
 	
 	switch (rtype){
 		case 'M':
 			/*Numero de vertices do grafo*/
-	    	*n = size = order_of_matrix(path);
+	    	*n = size = order_of_matrix(in);
+
+			printf("Size...\n");
 
 			/*Tamanho de v*/
 			g->sizev = size;
